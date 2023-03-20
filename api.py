@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import StreamingResponse
 
 from utils.tts import TTSHandler
 from utils.whisper import WhisperHandler
@@ -18,7 +19,7 @@ async def chatgpt(
     text: str, 
     action: str
 ):
-    chatgpt.get_text_from_input(text, action)
+    return chatgpt.get_text_from_input(text, action)
 
 @app.get("/whisper")
 async def whisper():
@@ -26,4 +27,9 @@ async def whisper():
 
 @app.get("/tts")
 async def tts(text: str):
-    tts.get_audio_from_text(text)
+    def iterfile():
+        with open(tts.get_audio_from_text(text), mode="rb") as file_like:
+            yield from file_like
+
+    return StreamingResponse(iterfile(), media_type="audio/mp3")
+    
