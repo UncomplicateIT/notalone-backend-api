@@ -19,6 +19,6 @@ class TTSHandler:
         encoded_bytes = speech['modelOutputs'][0]['audio'].split(',')[1].encode("ascii")
         decoded_bytes = base64.decodebytes(encoded_bytes)
 
-        with open("temp.mp3", "wb") as mp3_file:
+        with open("speech.mp3", "wb") as mp3_file:
             mp3_file.write(decoded_bytes)
-        return "speech.wav"
+        return "speech.mp3"
