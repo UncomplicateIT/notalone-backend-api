@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastapi.responses import StreamingResponse
+from fastapi.responses import FileResponse
 
 from utils.tts import TTSHandler
 from utils.whisper import WhisperHandler
@@ -15,21 +15,17 @@ async def root():
     return "NotAlone Backend API"
 
 @app.get("/chatgpt")
-async def chatgpt(
+async def chatgpt_route(
     text: str, 
     action: str
 ):
     return chatgpt.get_text_from_input(text, action)
 
 @app.get("/whisper")
-async def whisper():
+async def whisper_route():
     pass
 
 @app.get("/tts")
-async def tts(text: str):
-    def iterfile():
-        with open(tts.get_audio_from_text(text), mode="rb") as file_like:
-            yield from file_like
-
-    return StreamingResponse(iterfile(), media_type="audio/mp3")
+async def tts_route(text: str):
+    return FileResponse(tts.get_audio_from_text(text))
     

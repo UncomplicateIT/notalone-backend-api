@@ -1,11 +1,10 @@
 import base64
 import banana_dev as banana
 
-# Run the model
 class TTSHandler:
     def __init__(self) -> None:
         self.api_key = "656ac1d7-8902-4193-9e5c-c1504aa7b1d9"
-        self.model_key = "72fde273-52ac-460b-a924-df09dd0ad781"
+        self.model_key = "a16b6c4a-83d6-4663-8b71-d576fc72b669"
     
     def get_audio_from_text(self, text):
         inputs = {

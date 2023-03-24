@@ -4,7 +4,7 @@ import openai
 
 class ChatGPTHandler:
     def __init__(self) -> None:
-        openai.api_key = os.getenv("OPENAI_API_KEY")
+        openai.api_key = "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"
     
     def get_text_from_input(self, user_query, action='continue'):
         prompts = self.__fetch_prompts(user_query, action)
@@ -19,7 +19,7 @@ class ChatGPTHandler:
         return self.__prepare_output(response)
 
     def __fetch_prompts(self, user_query, action):
-        conv_list = json.load(open(f'prompts/{action}.json', 'r'))
+        conv_list = json.load(open(f'utils/prompts/{action}.json', 'r'))
         conv_list.append({"role": "user", "content": user_query})
         return conv_list
 
