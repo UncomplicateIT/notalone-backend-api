@@ -1,6 +1,3 @@
-datasets==2.10.1
+banana_dev==4.0.1
 fastapi==0.95.0
 openai==0.27.2
-soundfile==0.12.1
-torch==2.0.0
-transformers==4.27.1
