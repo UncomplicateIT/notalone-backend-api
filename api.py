@@ -29,9 +29,10 @@ async def chatgpt_route(
 
 @app.post("/whisper")
 async def whisper_route(
-    token: str
+    token: str,
+    usecase: str = "transcribe"
 ):
-    pass
+    return whisper.get_text_from_audio(token, usecase)
 
 @app.post("/tts")
 async def tts_route(text: str):
